@@ -1,0 +1,31 @@
+inherit_from: .rubocop_airbnb.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+# Rails用に最適化
+Rails:
+  Enabled: true
+
+# 文字数上限
+LineLength:
+  Max: 130
+
+AllCops:
+  SuggestExtensions: false
+  # 最新のルールを適用する
+  NewCops: enable
+  # 何のルールに引っかかったか表示する
+  DisplayCopNames: true
+  # rubocop対象外(リポジトリ毎で調節)
+  Exclude:
+    - "Gemfile"
+    - "bin/**/*"
+    - "db/**/*"
+    - "log/**/*"
+    - "tmp/**/*"
+    - "vendor/**/*"
+    - "lib/tasks/auto_annotate_models.rake"
+    - "config/environments/*"
+    - "config/puma.rb"
