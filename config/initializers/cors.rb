@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins '127.0.0.1:9000', 'localhost:9000'
+    origins '127.0.0.1:9000', 'localhost:9000', ENV.fetch('VERCEL_URL', nil)
 
     resource '*',
     headers: :any,
