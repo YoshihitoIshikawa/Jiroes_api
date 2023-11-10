@@ -65,5 +65,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
 config.hosts << ENV['NGROK_URL']
+config.hosts << ENV['HEROKU_URL']
 
 end
