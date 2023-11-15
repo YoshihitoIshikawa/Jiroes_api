@@ -1,0 +1,48 @@
+name: Ruby CI
+
+on: [push]
+
+jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.7
+
+      - name: Bundle Install
+        run: bundle install
+
+      - name: Run RuboCop
+        run: bundle exec rubocop
+
+  rspec:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      VERCEL_URL: ${{ secrets.VERCEL_URL }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.7
+
+      - name: Bundle Install
+        run: bundle install
+
+      - name: Run migration
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:migrate
+
+      - name: Run RSpec
+        run: bundle exec rspec
