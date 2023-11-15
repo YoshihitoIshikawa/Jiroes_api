@@ -42,12 +42,18 @@ jobs:
         with:
           ruby-version: 2.7.7
 
+      - name: Install sqlite3
+        run: |
+          sudo apt install libsqlite3-dev
+          gem install sqlite3 -v '1.4' --source 'https://rubygems.org/'
+          dpkg -L libsqlite3-dev
+
       - name: Bundle Install
         run: bundle install
 
       - name: Run migration
         run: |
-          cp config/database.yml.ci config/database.yml
+          # cp config/database.yml.ci config/database.yml
           bundle exec rails db:create RAILS_ENV=test
           bundle exec rails db:migrate RAILS_ENV=test
 
