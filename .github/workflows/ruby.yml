@@ -24,12 +24,10 @@ jobs:
       # - name: Set up test database
       #   run: bundle exec rails db:setup RAILS_ENV=test
 
-      # - name: Create and migrate Database
-      #   run: |
-      #     bundle exec rails db:create RAILS_ENV=test
-      #     bundle exec rails db:migrate RAILS_ENV=test
+      - name: Create and migrate Database
+        run: |
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
 
       - name: Run RSpec
         run: bundle exec rspec
-        env:
-          RAILS_ENV: test
