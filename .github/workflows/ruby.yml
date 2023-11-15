@@ -5,6 +5,9 @@ on: [push]
 jobs:
   rubocop:
     runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      VERCEL_URL: ${{ secrets.VERCEL_URL }}
 
     steps:
       - name: Checkout code
@@ -44,8 +47,8 @@ jobs:
 
       - name: Run migration
         run: |
-          bundle exec rails db:create RAILS_ENV=test
-          bundle exec rails db:migrate RAILS_ENV=test
+          bundle exec rails db:create
+          bundle exec rails db:migrate
 
       - name: Run RSpec
         run: bundle exec rspec
