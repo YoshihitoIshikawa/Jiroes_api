@@ -1,8 +1,13 @@
 class Api::V1::LikesController < SecuredController
+  def index
+    @likes = Like.all
+    render json: @likes
+  end
+
   def create
     @review = Review.find(params[:review_id])
-    like = Like.new(review: @review)
-    if like.save
+    @like = Like.new(review: @review)
+    if @like.save
       @review.increment!(:number_of_likes)
       render json: { liked: true, number_of_likes: @review.number_of_likes }
     else
