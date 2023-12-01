@@ -7,7 +7,7 @@ Rails.application.routes.draw do
           get 'search'
         end
         resources :reviews, only: [:index, :create, :show, :update, :destroy] do
-          resources :likes, only: [:create, :destroy]
+          resources :likes, only: [:index, :create, :destroy]
         end
       end
     end
