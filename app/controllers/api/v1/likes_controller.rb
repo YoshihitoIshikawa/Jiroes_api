@@ -2,7 +2,8 @@ class Api::V1::LikesController < SecuredController
   skip_before_action :authorize_request, only: [:index]
 
   def index
-    @likes = Like.all
+    @review = Review.find(params[:review_id])
+    @likes = @review.likes
     render json: @likes
   end
 
