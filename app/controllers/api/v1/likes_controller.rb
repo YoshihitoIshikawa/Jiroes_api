@@ -28,6 +28,6 @@ class Api::V1::LikesController < SecuredController
   private
 
   def like_params
-    params.permit(:sub, :review_id)
+    params.permit(:sub, :review_id, :shop_id)
   end
 end
