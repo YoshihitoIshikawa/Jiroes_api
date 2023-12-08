@@ -3,7 +3,7 @@ class Api::V1::ReviewsController < SecuredController
 
   def index
     @shop = Shop.find(params[:shop_id])
-    @reviews = @shop.reviews
+    @reviews = @shop.reviews.order(created_at: :desc)
     render json: @reviews
   end
 
