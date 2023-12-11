@@ -52,6 +52,6 @@ class Api::V1::ShopsController < SecuredController
 
   def shop_params
     params.permit(:name, :address, :phone_number, :access, :parking, :number_of_seats, :open_time,
-:menu, :closed_days, :remarks, :prohibited_matters, :when_to_buy_tickets, :call_timing)
+:menu, :closed_days, :remarks, :prohibited_matters, :when_to_buy_tickets, :call_timing, :latitude, :longitude)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_12_07_102522) do
+ActiveRecord::Schema.define(version: 2023_12_11_060438) do
 
   create_table "likes", force: :cascade do |t|
     t.string "sub", null: false
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 2023_12_07_102522) do
     t.text "call_timing"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "users", primary_key: "sub", id: :string, force: :cascade do |t|
