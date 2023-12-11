@@ -3,6 +3,7 @@ class Shop < ApplicationRecord
   has_many :likes, dependent: :destroy
 
   geocoded_by :address
+  after_validation :geocode, if: :address_changed?
 
   before_save :geocode_shop_address
 
