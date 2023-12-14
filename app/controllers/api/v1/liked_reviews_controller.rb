@@ -1,8 +1,8 @@
 class Api::V1::LikedReviewsController < SecuredController
   def index
-    likes = Like.where(sub: @current_user.sub)
-    review_ids = likes.map { |like| like['review_id'] }
-    liked_reviews = Review.where(id: review_ids)
+    likes = Like.where(sub: @current_user.sub).order(created_at: :desc)
+    review_ids = likes.pluck(:review_id)
+    liked_reviews = Review.where(id: review_ids).index_by(&:id).values_at(*review_ids)
     render json: liked_reviews
   end
 end
