@@ -22,7 +22,7 @@ RSpec.describe "Api::V1::LikesController", type: :request do
   end
 
   describe "POST /api/v1/shops/:shop_id/reviews/:review_id/likes" do
-    it "returns all likes for a review" do
+    it "creates a new like" do
       like_params = {
         sub: current_user.sub,
         shop_id: shop.id,
