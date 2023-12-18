@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get 'liked_reviews/index'
+      get 'my_reviews/index'
     end
   end
   namespace :api do
