@@ -18,8 +18,10 @@ class Api::V1::UsersController < SecuredController
     token = request.headers['Authorization']
     nickname = params[:nickname]
 
+    sub = params[:sub]
+    encoded_sub = URI.encode_www_form_component(sub)
     response = HTTParty.patch(
-      "#{ENV['AUTH0_DOMAIN']}api/v2/users/#{@current_user.sub}",
+      "#{ENV['AUTH0_DOMAIN']}api/v2/users/#{encoded_sub}",
       body: { nickname: nickname }.to_json,
       headers: {
         'Content-Type' => 'application/json',
