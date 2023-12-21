@@ -24,10 +24,22 @@ class Api::V1::UsersController < SecuredController
       scope: 'update:users',
     )
 
-    nickname = params[:nickname]
     sub = params[:sub]
+    user_data = {}
 
-    response = auth0_client.patch_user(sub, { nickname: nickname })
+    if params[:nickname].present?
+      user_data[:nickname] = params[:nickname]
+    end
+
+    if params[:email].present?
+      user_data[:email] = params[:email]
+    end
+
+    if params[:picture].present?
+      user_data[:picture] = params[:picture]
+    end
+
+    response = auth0_client.patch_user(sub, user_data)
 
     render json: response
   end
