@@ -1,3 +1,5 @@
+require 'auth0'
+
 class Api::V1::UsersController < SecuredController
   skip_before_action :authorize_request, only: [:index, :create]
   def index
@@ -15,21 +17,19 @@ class Api::V1::UsersController < SecuredController
   end
 
   def update
-    token = request.headers['Authorization']
-    nickname = params[:nickname]
-
-    sub = params[:sub]
-    encoded_sub = URI.encode_www_form_component(sub)
-    response = HTTParty.patch(
-      "#{ENV['AUTH0_DOMAIN']}api/v2/users/#{encoded_sub}",
-      body: { nickname: nickname }.to_json,
-      headers: {
-        'Content-Type' => 'application/json',
-        'Authorization' => token
-      }
+    auth0_client = Auth0Client.new(
+      client_id: ENV['AUTH0_MANAGEMENT_APP_CLIENT_ID'],
+      client_secret: ENV['AUTH0_MANAGEMENT_APP_CLIENT_SECRET'],
+      domain: ENV['AUTH0_MANAGEMENT_APP_DOMAIN'],
+      scope: 'update:users',
     )
 
-    render json: response.body, status: response.code
+    nickname = params[:nickname]
+    sub = params[:sub]
+
+    response = auth0_client.patch_user(sub, { nickname: nickname })
+
+    render json: response
   end
 
   private
