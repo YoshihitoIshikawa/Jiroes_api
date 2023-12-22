@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_12_14_103224) do
+ActiveRecord::Schema.define(version: 2023_12_22_053150) do
 
   create_table "likes", force: :cascade do |t|
     t.string "sub", null: false
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2023_12_14_103224) do
   create_table "users", primary_key: "sub", id: :string, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "picture"
   end
 
   add_foreign_key "likes", "reviews"
