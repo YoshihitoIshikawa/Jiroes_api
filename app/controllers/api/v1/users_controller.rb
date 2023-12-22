@@ -36,16 +36,16 @@ class Api::V1::UsersController < SecuredController
     end
 
     if params[:picture].present?
-      # if Rails.env.production?
+      if Rails.env.production?
         user = User.find_by(sub: sub)
         user.picture = params[:picture]
         user.save!
 
         picture_url = user.picture.url
-      # else
-      #   render json: { error: 'この操作は開発環境では実行できません。' }, status: :unprocessable_entity
-      #   return
-      # end
+      else
+        render json: { error: 'この操作は開発環境では実行できません。' }, status: :unprocessable_entity
+        return
+      end
 
       user_data[:picture] = picture_url
     end
