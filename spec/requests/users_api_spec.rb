@@ -36,7 +36,9 @@ describe 'PATCH users/:sub' do
   context 'when in production environment' do
     before do
       authorization_stub
+      # rubocop:disable all
       allow(Rails.env).to receive(:production?).and_return(true)
+      # rubocop:enable all
     end
 
     it 'updates the user picture' do
@@ -52,7 +54,9 @@ describe 'PATCH users/:sub' do
   context 'when in non-production environment' do
     before do
       authorization_stub
+      # rubocop:disable all
       allow(Rails.env).to receive(:production?).and_return(false)
+      # rubocop:enable all
     end
 
     it 'does not update the user picture and returns unprocessable entity status' do

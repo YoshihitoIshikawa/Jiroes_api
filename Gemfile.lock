@@ -235,6 +235,10 @@ GEM
       netrc (~> 0.8)
     retryable (3.0.5)
     rexml (3.2.6)
+    rspec (3.12.0)
+      rspec-core (~> 3.12.0)
+      rspec-expectations (~> 3.12.0)
+      rspec-mocks (~> 3.12.0)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
     rspec-expectations (3.12.3)
@@ -296,6 +300,8 @@ GEM
       mini_portile2 (~> 2.8.0)
     sqlite3 (1.6.3-arm64-darwin)
     ssrf_filter (1.1.2)
+    stub_env (1.0.4)
+      rspec (>= 2.0, < 4.0)
     thor (1.2.2)
     timeout (0.4.0)
     tzinfo (2.0.6)
@@ -337,6 +343,7 @@ DEPENDENCIES
   rubocop-rails
   spring
   sqlite3 (~> 1.4)
+  stub_env
   tzinfo-data
 
 RUBY VERSION
