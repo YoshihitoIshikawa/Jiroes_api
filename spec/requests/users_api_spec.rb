@@ -29,3 +29,38 @@ describe 'POST /users', type: :request do
     expect(created_user['sub']).to eq(new_user[:sub])
   end
 end
+
+describe 'PATCH users/:sub' do
+  let(:user) { create(:user, { sub: 'auth0|12345678abc' }) }
+
+  context 'when in production environment' do
+    before do
+      authorization_stub
+      allow(Rails.env).to receive(:production?).and_return(true)
+    end
+
+    it 'updates the user picture' do
+      new_picture = 'https://example.com/picture.jpg'
+
+      # 実際には存在しないテスト用のsubの為、テストでは'the user does not exist'のエラーになる事を想定
+      expect do
+        patch api_v1_user_path(user.sub), params: { sub: user.sub, picture: new_picture }
+      end.to raise_error(Auth0::NotFound)
+    end
+  end
+
+  context 'when in non-production environment' do
+    before do
+      authorization_stub
+      allow(Rails.env).to receive(:production?).and_return(false)
+    end
+
+    it 'does not update the user picture and returns unprocessable entity status' do
+      new_picture = fixture_file_upload('test.png', 'image/jpeg')
+
+      patch api_v1_user_path(user.sub), params: { sub: user.sub, picture: new_picture }
+
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+  end
+end
