@@ -63,6 +63,12 @@ GEM
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
+    auth0 (5.16.0)
+      addressable (~> 2.8)
+      jwt (~> 2.7)
+      rest-client (~> 2.1)
+      retryable (~> 3.0)
+      zache (~> 0.12)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
@@ -85,6 +91,7 @@ GEM
     database_cleaner-core (2.0.1)
     date (3.3.3)
     diff-lcs (1.5.0)
+    domain_name (0.6.20231109)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -116,6 +123,12 @@ GEM
     geocoder (1.8.2)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    http-accept (1.7.0)
+    http-cookie (1.0.5)
+      domain_name (~> 0.5)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -145,6 +158,7 @@ GEM
     minitest (5.19.0)
     msgpack (1.7.2)
     multi_json (1.15.0)
+    multi_xml (0.6.0)
     net-imap (0.3.7)
       date
       net-protocol
@@ -154,6 +168,7 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
+    netrc (0.11.0)
     nio4r (2.5.9)
     nokogiri (1.15.4)
       mini_portile2 (~> 2.8.2)
@@ -213,7 +228,17 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (2.8.2)
+    rest-client (2.1.0)
+      http-accept (>= 1.7.0, < 2.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
+    retryable (3.0.5)
     rexml (3.2.6)
+    rspec (3.12.0)
+      rspec-core (~> 3.12.0)
+      rspec-expectations (~> 3.12.0)
+      rspec-mocks (~> 3.12.0)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
     rspec-expectations (3.12.3)
@@ -275,6 +300,8 @@ GEM
       mini_portile2 (~> 2.8.0)
     sqlite3 (1.6.3-arm64-darwin)
     ssrf_filter (1.1.2)
+    stub_env (1.0.4)
+      rspec (>= 2.0, < 4.0)
     thor (1.2.2)
     timeout (0.4.0)
     tzinfo (2.0.6)
@@ -283,6 +310,7 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    zache (0.13.1)
     zeitwerk (2.6.11)
 
 PLATFORMS
@@ -290,6 +318,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  auth0
   bootsnap (>= 1.4.4)
   byebug
   carrierwave
@@ -298,6 +327,7 @@ DEPENDENCIES
   factory_bot_rails
   fog-aws
   geocoder
+  httparty
   jwt
   listen (~> 3.3)
   mini_magick (~> 4.12)
@@ -313,6 +343,7 @@ DEPENDENCIES
   rubocop-rails
   spring
   sqlite3 (~> 1.4)
+  stub_env
   tzinfo-data
 
 RUBY VERSION
